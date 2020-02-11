@@ -1,5 +1,6 @@
-import { userConstants } from './../constants'
+import { userConstants } from './../_constants'
 import { userService } from './../_services'
+import { Alert } from 'react-native'
 
 export const userActions = {
     getToken,
@@ -14,10 +15,12 @@ function getToken(credentials) {
         userService.getToken(credentials)
             .then(
                 response => {
+                    Alert.alert('error')
                     dispatch(success(response.accessToken))
                 },
                 error => {
-                    dispatch(failure(error))
+                    //Alert.alert(error)
+                    dispatch(failure(error.message))
                 }
             )
 

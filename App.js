@@ -1,37 +1,42 @@
 import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
-import React, { useState } from 'react'
-import { Platform, StatusBar, StyleSheet, View } from 'react-native'
-import { Provider, connect } from 'react-redux'
+import React from 'react'
+import { View } from 'react-native'
+import { Provider } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons'
 
 import AppNavigator from './navigation/AppNavigator'
 
 import { store } from './_helpers/store'
+import styles from './screens/style'
 
-function App(props) {
-  const [isLoadingComplete, setLoadingComplete] = useState(false)
-
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
-    return (
-      <Provider store={store}>
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loadingComplete: false,
+    }
+  }
+  
+  render() {
+    if (!this.state.loadingComplete && !this.props.skipLoadingScreen) {
+      return (
         <AppLoading
-          startAsync={loadResourcesAsync}
-          onError={handleLoadingError}
-          onFinish={() => handleFinishLoading(setLoadingComplete)}
-        />
-      </Provider>
-    )
-  } else {
-    return (
-      <Provider store={store}>
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
-      </Provider>
-    )
+            startAsync={loadResourcesAsync}
+            onError={handleLoadingError}
+            onFinish={() => this.setState({ loadingComplete: true })}
+          />
+      )
+    } else {
+      return (
+        <Provider store={store}>
+          <View style={styles.container}>
+            <AppNavigator theme="dark" />
+          </View>
+        </Provider>
+      )
+    }
   }
 }
 
@@ -56,16 +61,3 @@ function handleLoadingError(error) {
   // service, for example Sentry
   console.warn(error)
 }
-
-function handleFinishLoading(setLoadingComplete) {
-  setLoadingComplete(true)
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-})
-
-export default App

@@ -1,113 +1,70 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import React from 'react'
+import { Platform } from 'react-native'
+import { createStackNavigator } from 'react-navigation-stack'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/Home/HomeScreen';
-import LinksScreen from '../screens/Links/LinksScreen';
-import SettingsScreen from '../screens/Settings/SettingsScreen';
-import LoginScreen from '../screens/Login/LoginScreen'
-
-const config = Platform.select({
-  web: { headerMode: 'screen' },
-  default: {},
-});
+import TabBarIcon from './../components/TabBarIcon'
+import HomeScreen from './../screens/HomeScreen'
+//import SettingsScreen from './../screens/SettingsScreen'
+import UserScreen from './../screens/UserScreen'
+import MenuScreen from './../screens/MenuScreen'
+import AdminScreen from './../screens/AdminScreen'
 
 const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-  },
-  config
-);
-
+  { Home: HomeScreen },
+  { headerMode: 'none' }
+)
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
+    <TabBarIcon focused={focused} name={ Platform.OS === 'ios' ? 'ios-home' : 'md-home' } />
   ),
-};
+}
+HomeStack.path = ''
 
-HomeStack.path = '';
-
-const LinksStack = createStackNavigator(
-  {
-    Links: LinksScreen,
-  },
-  config
-);
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+const UserStack = createStackNavigator(
+  { User: UserScreen },
+  { headerMode: 'none' }
+)
+UserStack.navigationOptions = {
+  tabBarLabel: 'User',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
   ),
-};
+}
+UserStack.path = ''
 
-LinksStack.path = '';
-
-// const LinksStack = createStackNavigator(
-//   {
-//     Links: LinksScreen,
-//   },
-//   config
-// );
-
-// LinksStack.navigationOptions = {
-//   tabBarLabel: 'Links',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-//   ),
-// };
-
-// LinksStack.path = '';
-
-const SettingsStack = createStackNavigator(
-  {
-    Settings: SettingsScreen,
-  },
-  config
-);
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+const MenuStack = createStackNavigator(
+  { Menu: MenuScreen },
+  { headerMode: 'none' }
+)
+MenuStack.navigationOptions = {
+  tabBarLabel: 'Menu',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-restaurant' : 'md-restaurant'} />
   ),
-};
+}
+MenuStack.path = ''
 
-SettingsStack.path = '';
-
-const LoginStack = createStackNavigator(
-  {
-    Login: LoginScreen,
-  },
-  config
-);
-
-LoginStack.navigationOptions = {
-  tabBarLabel: 'Login',
+const AdminStack = createStackNavigator(
+  { Admin: AdminScreen },
+  { headerMode: 'none' }
+)
+AdminStack.navigationOptions = {
+  tabBarLabel: 'Admin',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-log-in' : 'md-log-in'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-construct' : 'md-construct'} />
   ),
-};
-
-LoginStack.path = '';
+}
+AdminStack.path = ''
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
-  LoginStack,
-});
+  UserStack,
+  MenuStack,
+  AdminStack,
+})
 
-tabNavigator.path = '';
+tabNavigator.path = ''
 
-export default tabNavigator;
+export default tabNavigator

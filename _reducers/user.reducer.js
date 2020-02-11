@@ -1,8 +1,8 @@
-import { userConstants } from './../constants'
+import { userConstants } from './../_constants'
 
 const initialState = {
     loading: true,
-    token: null,
+    token: 'xxx',
 }
 
 export function user(state = initialState, action) {
