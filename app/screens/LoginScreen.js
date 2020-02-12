@@ -3,8 +3,8 @@ import React, { Component } from "react"
 import { connect } from 'react-redux'
 
 import styles from './style'
-import { userActions } from './../_actions'
-import { store } from './../_helpers'
+import { userActions } from './../core-module/_actions'
+import { store } from './../core-module/_helpers'
 import { Text, View, TextInput, AsyncStorage, Alert } from 'react-native' 
 import { Button } from 'react-native-elements' 
 
