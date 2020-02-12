@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons'
 
 import AppNavigator from './navigation/AppNavigator'
 
-import { store } from './_helpers/store'
+import { store } from './../redux/_helpers'
 import styles from './screens/style'
 
 export default class App extends React.Component {
