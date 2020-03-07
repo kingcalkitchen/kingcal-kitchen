@@ -1,0 +1,3 @@
+[submodule "core-modules"]
+	path = core-modules
+	url = git@github.com:kingcalkitchen/kingcal-kitchen-reactive-core.git
