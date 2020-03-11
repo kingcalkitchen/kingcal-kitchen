@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Button, Text, TouchableOpacity, View } from 'react-native'
 
-import { Context } from './../core-modules/_helpers'
+import { Context } from './../core-module/_helpers'
 
 import styles from './styles'
 

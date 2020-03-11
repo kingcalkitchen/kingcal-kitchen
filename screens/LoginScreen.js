@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Button, View, TextInput, AsyncStorage, TouchableOpacity, Image } from 'react-native'
 
-import { Context } from './../core-modules/_helpers'
+import { Context } from './../core-module/_helpers'
 
 import styles from './styles'
 

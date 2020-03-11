@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Button, Text, TouchableOpacity, View, Alert } from 'react-native'
-import { navigationConstants } from '../../constants/navigation.constants'
+import { navigationConstants } from './../../core-module/_constants/navigation.constants'
 
 import MapView, { Marker } from 'react-native-maps'
 

@@ -10,7 +10,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import TabBarIcon from './components/TabBarIcon'
 
-import { navigationConstants } from './constants/navigation.constants'
+import { navigationConstants, userConstants } from './core-module/_constants'
 
 import HomeScreen from './screens/HomeScreen'
 import LocationsScreen from './screens/Locations/LocationsScreen'
@@ -33,12 +33,9 @@ import RecipesListScreen from './screens/MealMenu/RecipesList/RecipesListScreen'
 import SearchScreen from './screens/MealMenu/Search/SearchScreen'
 //import SplashScreen from './screens/MealMenu/Splash/SplashScreen'
 
-
-import { userConstants } from './core-modules/_constants'
-
 import useLinking from './navigation/useLinking'
 
-import { Context } from './core-modules/_helpers'
+import { Context } from './core-module/_helpers'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
