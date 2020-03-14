@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     loginFormTextInput: {
+        width: 300,
         fontSize: 30,
         borderWidth: 1,
         borderColor: '#eaeaea',

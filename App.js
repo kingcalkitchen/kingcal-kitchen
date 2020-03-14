@@ -21,7 +21,7 @@ import FgnFitnessScreen from './screens/Locations/FgnFitness'
 
 //import AuthLoadingScreen from './screens/AuthLoadingScreen'
 import { LoginScreen } from './screens/LoginScreen'
-import RegisterScreen from './screens/RegisterScreen'
+import { RegisterScreen } from './screens/RegisterScreen'
 
 
 import CategoriesScreen from './screens/MealMenu/Categories/CategoriesScreen'
@@ -38,6 +38,12 @@ import useLinking from './navigation/useLinking'
 
 import { store } from './core-module/_helpers'
 
+import {decode, encode} from 'base-64'
+
+if (!global.btoa) {  global.btoa = encode }
+
+if (!global.atob) { global.atob = decode }
+
 export default function App(props) {
   const [token, setToken] = React.useState(store.getState().user.token)
   const [userLoggingIn, setUserLoggingIn] = React.useState(false)
@@ -52,7 +58,7 @@ export default function App(props) {
     setToken(token)
     setUserLoggingIn(false)
     setIsSignout(false)
-    await AsyncStorage.setItem('userToken', token)
+    await AsyncStorage.setItem(userConstants.USER_TOKEN, token)
   }
   const _signInAsync = credentials => {
     setUserLoggingIn(true)
@@ -62,10 +68,14 @@ export default function App(props) {
   const removeStorage = async () => {
     setToken(null)
     setIsSignout(true)
-    await AsyncStorage.removeItem('userToken')
+    await AsyncStorage.removeItem(userConstants.USER_TOKEN)
   }
   const _signOutAsync = () => {
     store.dispatch(userActions.removeToken(removeStorage))
+  }
+
+  const _registerAsync = user => {
+    store.dispatch(userActions.register(user, _signInAsync))
   }
 
   const Stack = createStackNavigator()
@@ -101,7 +111,7 @@ export default function App(props) {
   function MealMenuStackScreen() {
     return (
       <MealMenuStack.Navigator
-        initialRouteName="MealMenuHome"
+        initialRouteName={navigationConstants.MEAM_MENU_HOME}
         headerMode={Platform.OS === 'ios' ? 'float' : 'screen'}
       >
         <MealMenuStack.Screen name={navigationConstants.MEAM_MENU_HOME} component={MealMenuHomeScreen} />
@@ -144,7 +154,7 @@ export default function App(props) {
     async function verifyUser() {
       let userToken
       try {
-        userToken = await AsyncStorage.getItem('userToken')
+        userToken = await AsyncStorage.getItem(userConstants.USER_TOKEN)
       } catch (e) {
         // Restoring token failed
       }
@@ -187,13 +197,9 @@ export default function App(props) {
                 <Stack.Screen name={navigationConstants.SIGN_IN} options={{ headerShown: false, animationTypeForReplace: isSignout ? 'pop' : 'push' }}>
                   {props => <LoginScreen {...props} signIn={credentials => _signInAsync(credentials)} />}
                 </Stack.Screen>
-                <Stack.Screen
-                  name={navigationConstants.SIGN_UP}
-                  component={RegisterScreen}
-                  options={{
-                    headerShown: false,
-                  }}
-                />
+                <Stack.Screen name={navigationConstants.SIGN_UP} options={{ headerShown: false }}>
+                  {props => <RegisterScreen {...props} register={user => _registerAsync(user)} />}
+                </Stack.Screen>
               </Stack.Navigator>
             </>
           ) : (
