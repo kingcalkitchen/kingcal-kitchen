@@ -3,8 +3,23 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    centered: {
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    title: {
+        fontSize: 50,
+    },
+    text: {
+        fontSize: 25,
+    },
+    smallText: {
+        fontSize: 15,
+    },
+    divider: { 
+        marginTop: 20, 
+        marginBottom: 20 
     },
     loginFormContainer: {
         marginTop: 30,
@@ -19,13 +34,6 @@ const styles = StyleSheet.create({
     },
     hamburgerMenu: {
         color: "#67994e",
-    }, 
-    locationTitle: {
-        textDecorationLine: 'underline',
-        fontSize: 50,
-    },
-    locationText: {
-        fontSize: 25,
     },
 })
 

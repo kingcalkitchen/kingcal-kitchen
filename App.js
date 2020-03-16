@@ -13,16 +13,13 @@ import TabBarIcon from './components/TabBarIcon'
 import { navigationConstants, userConstants } from './core-module/_constants'
 import { userActions } from './core-module/_actions'
 
-import { HomeScreen } from './screens/HomeScreen'
-import LocationsScreen from './screens/Locations/LocationsScreen'
-import KingCalKitchenScreen from './screens/Locations/KingCalKitchen'
-import CuttingEdgeNutritionScreen from './screens/Locations/CuttingEdgeNutrition'
-import FgnFitnessScreen from './screens/Locations/FgnFitness'
+import { HomeStackScreen, LocationStackScreen } from './navigation'
+
+import { nativeSecurity } from './helpers'
 
 //import AuthLoadingScreen from './screens/AuthLoadingScreen'
 import { LoginScreen } from './screens/LoginScreen'
 import { RegisterScreen } from './screens/RegisterScreen'
-
 
 import CategoriesScreen from './screens/MealMenu/Categories/CategoriesScreen'
 import DrawerContainer from './screens/MealMenu/DrawerContainer/DrawerContainer'
@@ -38,11 +35,10 @@ import useLinking from './navigation/useLinking'
 
 import { store } from './core-module/_helpers'
 
-import {decode, encode} from 'base-64'
+import { decode, encode } from 'base-64'
 
-if (!global.btoa) {  global.btoa = encode }
-
-if (!global.atob) { global.atob = decode }
+if (!global.btoa) global.btoa = encode
+if (!global.atob) global.atob = decode
 
 export default function App(props) {
   const [token, setToken] = React.useState(store.getState().user.token)
@@ -54,58 +50,8 @@ export default function App(props) {
   const containerRef = React.useRef()
   const { getInitialState } = useLinking(containerRef)
 
-  const setStorage = async token => {
-    setToken(token)
-    setUserLoggingIn(false)
-    setIsSignout(false)
-    await AsyncStorage.setItem(userConstants.USER_TOKEN, token)
-  }
-  const _signInAsync = credentials => {
-    setUserLoggingIn(true)
-    store.dispatch(userActions.getToken(credentials, setStorage))
-  }
-
-  const removeStorage = async () => {
-    setToken(null)
-    setIsSignout(true)
-    await AsyncStorage.removeItem(userConstants.USER_TOKEN)
-  }
-  const _signOutAsync = () => {
-    store.dispatch(userActions.removeToken(removeStorage))
-  }
-
-  const _registerAsync = user => {
-    store.dispatch(userActions.register(user, _signInAsync))
-  }
-
   const Stack = createStackNavigator()
   const Tab = createBottomTabNavigator()
-
-  const HomeStack = createStackNavigator()
-  function HomeStackScreen() {
-    return (
-      <HomeStack.Navigator>
-        <HomeStack.Screen name={navigationConstants.HOME}>
-          {props => <HomeScreen {...props} signOut={() => _signOutAsync()} />}
-        </HomeStack.Screen>
-      </HomeStack.Navigator>
-    )
-  }
-
-  // TODO
-  // there should only be one location template
-  // remove kingcal kitchen, cutting edge nutrition, and fgn fitness
-  const LocationStack = createStackNavigator()
-  function LocationStackScreen() {
-    return (
-      <LocationStack.Navigator>
-        <LocationStack.Screen name={navigationConstants.LOCATIONS} component={LocationsScreen} />
-        <LocationStack.Screen name={navigationConstants.KINGCAL_KITCHEN} component={KingCalKitchenScreen} />
-        <LocationStack.Screen name={navigationConstants.CUTTING_EDGE_NUTRITION} component={CuttingEdgeNutritionScreen} />
-        <LocationStack.Screen name={navigationConstants.FGN_FITNESS} component={FgnFitnessScreen} />
-      </LocationStack.Navigator>
-    )
-  }
 
   const MealMenuStack = createStackNavigator()
   function MealMenuStackScreen() {
@@ -195,10 +141,10 @@ export default function App(props) {
                 }}
               >
                 <Stack.Screen name={navigationConstants.SIGN_IN} options={{ headerShown: false, animationTypeForReplace: isSignout ? 'pop' : 'push' }}>
-                  {props => <LoginScreen {...props} signIn={credentials => _signInAsync(credentials)} />}
+                  {props => <LoginScreen {...props} signIn={credentials => nativeSecurity._signInAsync(credentials, { setUserLoggingIn, setToken, setIsSignout })} />}
                 </Stack.Screen>
                 <Stack.Screen name={navigationConstants.SIGN_UP} options={{ headerShown: false }}>
-                  {props => <RegisterScreen {...props} register={user => _registerAsync(user)} />}
+                  {props => <RegisterScreen {...props} register={user => nativeSecurity._registerAsync(user, { setUserLoggingIn, setToken, setIsSignout })} />}
                 </Stack.Screen>
               </Stack.Navigator>
             </>
@@ -207,28 +153,31 @@ export default function App(props) {
                 <Tab.Navigator>
                   <Tab.Screen
                     name={navigationConstants.HOME}
-                    component={HomeStackScreen}
                     options={{
                       title: 'Home',
-                      tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'} />,
+                      tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'} />
                     }}
-                  />
+                  >
+                    {props => <HomeStackScreen {...props} signOut={() => nativeSecurity._signOutAsync({ setToken, setIsSignout })} />}
+                  </Tab.Screen>
                   <Tab.Screen
                     name={navigationConstants.LOCATIONS}
-                    component={LocationStackScreen}
                     options={{
                       title: 'Locations',
-                      tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-compass' : 'md-compass'} />,
+                      tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-compass' : 'md-compass'} />
                     }}
-                  />
+                  >
+                    {props => <LocationStackScreen {...props} />}
+                  </Tab.Screen>
                   <Tab.Screen
                     name={navigationConstants.MEAM_MENU_HOME}
-                    component={MealMenuStackScreen}
                     options={{
                       title: 'MealMenuHome',
                       tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-pizza' : 'md-pizza'} />,
                     }}
-                  />
+                  >
+                    {props => <MealMenuStackScreen {...props} />}
+                  </Tab.Screen>
                 </Tab.Navigator>
               </>
             )

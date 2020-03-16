@@ -1,20 +1,23 @@
 import * as React from "react"
 import { connect } from 'react-redux'
 import { Button, View, TextInput, Image } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import { navigationConstants } from './../core-module/_constants'
 
 import styles from './styles'
 
 const RegisterScreen = props => {
-  const { navigation, register } = props
+  const navigation = useNavigation()
+
+  const { register } = props
 
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [confirmPassword, setConfirmPassword] = React.useState('')
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, styles.centered]}>
       <Image source={require('./../assets/kingcal-meals.png')} />
 
       <TextInput

@@ -1,19 +1,22 @@
-import * as React from "react"
+import * as React from 'react'
 import { connect } from 'react-redux'
 import { Button, View, TextInput, Image } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import { navigationConstants } from './../core-module/_constants'
 
 import styles from './styles'
 
 const LoginScreen = props => {
-  const { navigation, signIn } = props
+  const navigation = useNavigation()
+
+  const { signIn } = props
   
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, styles.centered]}>
       <Image source={require('./../assets/kingcal-meals.png')} />
 
       <View style={styles.loginFormContainer}>

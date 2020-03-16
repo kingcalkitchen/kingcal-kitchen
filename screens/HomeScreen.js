@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from 'react-redux'
-import { Button, Text, TouchableOpacity, View } from 'react-native'
+import { Button, Text, View } from 'react-native'
 
 import styles from './styles'
 
@@ -25,24 +25,22 @@ const HomeScreen = props => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, styles.centered]}>
       <View style={{ margin: 20, padding: 20 }}>
-        <Text style={styles.locationTitle}>This is the Home Screen</Text>
+        <Text style={styles.title}>This is the Home Screen</Text>
       </View>
 
       <Button onPress={() => signOut()} title="Log Out" />
 
       <View style={{ margin: 20, padding: 20 }}>
-        <Text style={styles.locationTitle}>Access Token</Text>
+        <Text style={styles.title}>Access Token</Text>
         <Text>{token}</Text>
       </View>
 
       <View style={{ margin: 20, padding: 20 }}>
-        <Text style={styles.locationTitle}>User</Text>
+        <Text style={styles.title}>User</Text>
         {renderUserData()}
       </View>
-
-
     </View>
   )
 }

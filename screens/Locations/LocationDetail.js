@@ -1,21 +1,67 @@
-// import React, { Component } from "react"
-// import { Button, Text, TouchableOpacity, View, Alert } from 'react-native'
+import React from "react"
+import { connect } from 'react-redux'
+import { Text, View, Linking } from 'react-native'
+import { Divider } from 'react-native-elements'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
-// import MapView, { Marker } from 'react-native-maps'
+import styles from '../styles'
 
-// import styles from '../styles'
+const LocationDetail = props => {
+    const navigation = useNavigation()
+    const route = useRoute()
 
-// export default function LocationDetail({ navigation: { navigate } }) {
-//     return (
-//         <View style={{ flex: 1 }}>
-//             <Text style={styles.locationTitle}>KingCal Kitchen</Text>
-//             <Text>1315 S Rangeline Rd</Text>
-//             <Text>Carmel, IN 46032</Text>
-//             <Text>(317) 876-5432</Text>
-//             <Text>Hours:</Text>
-//             <Text>M-F: 10-7</Text>
-//             <Text>Sat.: 10-7</Text>
-//             <Text>Sun.: 10-7</Text>
-//         </View>
-//     )
-// }
+    const { title, address, phone, hours, options } = route.params
+
+    const renderTitle = () => {
+        return (
+            <>
+                <Text style={[styles.title, { textDecorationLine: 'underline', }]}>
+                    <Text>{title}</Text>{options && <Text>*</Text>}
+                </Text>
+            </>
+        )
+    }
+
+    const renderAddress = () => {
+        return (
+            <>
+                <Text style={styles.text}>
+                    <Text >{address.street1}{'\n'}</Text>
+                    {address.street2 && <Text>{address.street2}{'\n'}</Text>}
+                    <Text>{address.city},&nbsp;{address.state}&nbsp;{address.zip}</Text>
+                </Text>
+            </>
+        )
+    }
+
+    const renderHours = () => {
+        return (
+            <>
+                <Text style={styles.text}>
+                    <Text>Hours:{'\n'}</Text>
+                    {hours && Object.keys(hours).map((day, idx) => <Text key={idx}>{day}&nbsp;:&nbsp;{hours[day]}{'\n'}</Text>)}
+                </Text>
+            </>
+        )
+    }
+
+    return (
+        <View style={[styles.container, { padding: 20 }]}>
+            {renderTitle()}
+            {renderAddress()}
+            <Text style={[styles.text, { color: 'blue' }]} onPress={() => { Linking.openURL(`tel:${phone}`) }}>{phone}</Text>
+            <Divider style={styles.divider} />
+            {renderHours()}
+            <Divider style={styles.divider} />
+            {options && <Text style={styles.smallText}>*{options.text}</Text>}
+        </View>
+    )
+}
+
+const mapStateToProps = state => {
+    return {}
+}
+
+const connectedApp = connect(mapStateToProps)(LocationDetail)
+export { connectedApp as LocationDetail }
+
