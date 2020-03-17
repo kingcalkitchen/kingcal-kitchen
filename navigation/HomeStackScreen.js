@@ -2,7 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { navigationConstants } from './../core-module/_constants'
-import { HomeScreen } from './../screens/HomeScreen'
+import { HomeScreen } from './../screens/Home'
 
 const HomeStack = createStackNavigator()
 export const HomeStackScreen = props => {

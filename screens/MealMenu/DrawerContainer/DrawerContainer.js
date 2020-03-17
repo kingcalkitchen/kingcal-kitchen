@@ -12,7 +12,7 @@ export default class DrawerContainer extends React.Component {
         <View style={styles.container}>
           <MenuButton
             title="HOME"
-            source={require('../../../assets/icons/home.png')}
+            source={require('./../../../core-module/_assets/icons/home.png')}
             onPress={() => {
               navigation.navigate('Home');
               navigation.closeDrawer();
@@ -20,7 +20,7 @@ export default class DrawerContainer extends React.Component {
           />
           <MenuButton
             title="CATEGORIES"
-            source={require('../../../assets/icons/category.png')}
+            source={require('./../../../core-module/_assets/icons/category.png')}
             onPress={() => {
               navigation.navigate('Categories');
               navigation.closeDrawer();
@@ -28,7 +28,7 @@ export default class DrawerContainer extends React.Component {
           />
           <MenuButton
             title="SEARCH"
-            source={require('../../../assets/icons/search.png')}
+            source={require('./../../../core-module/_assets/icons/search.png')}
             onPress={() => {
               navigation.navigate('Search');
               navigation.closeDrawer();

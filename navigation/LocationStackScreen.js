@@ -2,8 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { navigationConstants } from './../core-module/_constants'
-import { LocationsScreen } from './../screens/Locations/LocationsScreen'
-import { LocationDetail } from './../screens/Locations/LocationDetail'
+import { LocationsScreen, LocationDetail } from './../screens/Locations'
 
 const LocationStack = createStackNavigator()
 export const LocationStackScreen = props => {

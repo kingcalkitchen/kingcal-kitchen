@@ -18,8 +18,7 @@ import { HomeStackScreen, LocationStackScreen } from './navigation'
 import { nativeSecurity } from './helpers'
 
 //import AuthLoadingScreen from './screens/AuthLoadingScreen'
-import { LoginScreen } from './screens/LoginScreen'
-import { RegisterScreen } from './screens/RegisterScreen'
+import { LoginScreen, RegisterScreen } from './screens/Auth'
 
 import CategoriesScreen from './screens/MealMenu/Categories/CategoriesScreen'
 import DrawerContainer from './screens/MealMenu/DrawerContainer/DrawerContainer'
@@ -85,8 +84,9 @@ export default function App(props) {
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,
-          'FallingSky': require('./assets/fonts/FallingSky.ttf'),
-          'FallingSkyCond': require('./assets/fonts/FallingSkyCond.ttf'),
+          
+          'FallingSky': require('./core-module/_assets/fonts/FallingSky.ttf'),
+          'FallingSkyCond': require('./core-module/_assets/fonts/FallingSkyCond.ttf'),
         })
       } catch (e) {
         // We might want to provide this error information to an error reporting service

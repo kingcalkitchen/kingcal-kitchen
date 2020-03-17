@@ -25,7 +25,7 @@ const HomeScreen = props => {
   }
 
   return (
-    <View style={[styles.container, styles.centered]}>
+    <View style={styles.container}>
       <View style={{ margin: 20, padding: 20 }}>
         <Text style={styles.title}>This is the Home Screen</Text>
       </View>

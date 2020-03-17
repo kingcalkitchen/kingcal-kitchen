@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Button, View, TextInput, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
-import { navigationConstants } from './../core-module/_constants'
+import { navigationConstants } from '../../core-module/_constants'
 
 import styles from './styles'
 
@@ -17,15 +17,15 @@ const RegisterScreen = props => {
   const [confirmPassword, setConfirmPassword] = React.useState('')
 
   return (
-    <View style={[styles.container, styles.centered]}>
-      <Image source={require('./../assets/kingcal-meals.png')} />
+    <View style={styles.container}>
+      <Image source={require('./../../core-module/_assets/kingcal-meals.png')} />
 
       <TextInput
         placeholder="Email"
         name="email"
         value={email}
         onChangeText={(text) => setEmail(text)}
-        style={styles.loginFormTextInput}
+        style={styles.textInput}
       />
       <TextInput
         placeholder="Password"
@@ -33,7 +33,7 @@ const RegisterScreen = props => {
         value={password}
         onChangeText={(text) => setPassword(text)}
         secureTextEntry={true}
-        style={styles.loginFormTextInput}
+        style={styles.textInput}
       />
       <TextInput
         placeholder="Confirm Password"
@@ -41,7 +41,7 @@ const RegisterScreen = props => {
         value={confirmPassword}
         onChangeText={(text) => setConfirmPassword(text)}
         secureTextEntry={true}
-        style={styles.loginFormTextInput}
+        style={styles.textInput}
       />
       <Button
         color="#67994e"

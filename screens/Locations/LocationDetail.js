@@ -4,7 +4,7 @@ import { Text, View, Linking } from 'react-native'
 import { Divider } from 'react-native-elements'
 import { useNavigation, useRoute } from '@react-navigation/native'
 
-import styles from '../styles'
+import styles from './styles'
 
 const LocationDetail = props => {
     const navigation = useNavigation()
@@ -46,7 +46,7 @@ const LocationDetail = props => {
     }
 
     return (
-        <View style={[styles.container, { padding: 20 }]}>
+        <View style={[styles.flexBase, { padding: 20 }]}>
             {renderTitle()}
             {renderAddress()}
             <Text style={[styles.text, { color: 'blue' }]} onPress={() => { Linking.openURL(`tel:${phone}`) }}>{phone}</Text>

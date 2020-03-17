@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Button, View, TextInput, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
-import { navigationConstants } from './../core-module/_constants'
+import { navigationConstants } from '../../core-module/_constants'
 
 import styles from './styles'
 
@@ -16,16 +16,16 @@ const LoginScreen = props => {
   const [password, setPassword] = React.useState('')
 
   return (
-    <View style={[styles.container, styles.centered]}>
-      <Image source={require('./../assets/kingcal-meals.png')} />
+    <View style={styles.container}>
+      <Image source={require('./../../core-module/_assets/kingcal-meals.png')} />
 
-      <View style={styles.loginFormContainer}>
+      <View>
         <TextInput
           placeholder="Email"
           name="email"
           value={email}
           onChangeText={setEmail}
-          style={styles.loginFormTextInput}
+          style={styles.textInput}
         />
         <TextInput
           placeholder="Password"
@@ -33,7 +33,7 @@ const LoginScreen = props => {
           value={password}
           onChangeText={setPassword}
           secureTextEntry={true}
-          style={styles.loginFormTextInput}
+          style={styles.textInput}
         />
       </View>
 
