@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native'
+import {AsyncStorage} from 'react-native'
 
 import { userConstants } from '../core-module/_constants'
 import { userActions } from '../core-module/_actions'
