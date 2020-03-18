@@ -13,22 +13,22 @@ import TabBarIcon from './components/TabBarIcon'
 import { navigationConstants, userConstants } from './core-module/_constants'
 import { userActions } from './core-module/_actions'
 
-import { HomeStackScreen, LocationStackScreen } from './navigation'
+import { HomeStackScreen, LocationStackScreen, MenuStackScreen } from './navigation'
 
 import { nativeSecurity } from './helpers'
 
 //import AuthLoadingScreen from './screens/AuthLoadingScreen'
 import { LoginScreen, RegisterScreen } from './screens/Auth'
 
-import CategoriesScreen from './screens/MealMenu/Categories/CategoriesScreen'
-import DrawerContainer from './screens/MealMenu/DrawerContainer/DrawerContainer'
-import MealMenuHomeScreen from './screens/MealMenu/Home/HomeScreen'
-import IngredientScreen from './screens/MealMenu/Ingredient/IngredientScreen'
-import IngredientsDetailsScreen from './screens/MealMenu/IngredientsDetails/IngredientsDetailsScreen'
-import RecipeScreen from './screens/MealMenu/Recipe/RecipeScreen'
-import RecipesListScreen from './screens/MealMenu/RecipesList/RecipesListScreen'
-import SearchScreen from './screens/MealMenu/Search/SearchScreen'
-//import SplashScreen from './screens/MealMenu/Splash/SplashScreen'
+// import CategoriesScreen from './screens/MealMenu/Categories/CategoriesScreen'
+// import DrawerContainer from './screens/MealMenu/DrawerContainer/DrawerContainer'
+// import MealMenuHomeScreen from './screens/MealMenu/Home/HomeScreen'
+// import IngredientScreen from './screens/MealMenu/Ingredient/IngredientScreen'
+// import IngredientsDetailsScreen from './screens/MealMenu/IngredientsDetails/IngredientsDetailsScreen'
+// import RecipeScreen from './screens/MealMenu/Recipe/RecipeScreen'
+// import RecipesListScreen from './screens/MealMenu/RecipesList/RecipesListScreen'
+// import SearchScreen from './screens/MealMenu/Search/SearchScreen'
+// //import SplashScreen from './screens/MealMenu/Splash/SplashScreen'
 
 import useLinking from './navigation/useLinking'
 
@@ -52,23 +52,23 @@ export default function App(props) {
   const Stack = createStackNavigator()
   const Tab = createBottomTabNavigator()
 
-  const MealMenuStack = createStackNavigator()
-  function MealMenuStackScreen() {
-    return (
-      <MealMenuStack.Navigator
-        initialRouteName={navigationConstants.MEAM_MENU_HOME}
-        headerMode={Platform.OS === 'ios' ? 'float' : 'screen'}
-      >
-        <MealMenuStack.Screen name={navigationConstants.MEAM_MENU_HOME} component={MealMenuHomeScreen} />
-        <MealMenuStack.Screen name={navigationConstants.CATEGORIES} component={CategoriesScreen} />
-        <MealMenuStack.Screen name={navigationConstants.INGREDIENT} component={IngredientScreen} />
-        <MealMenuStack.Screen name={navigationConstants.INGREDIENTS} component={IngredientsDetailsScreen} />
-        <MealMenuStack.Screen name={navigationConstants.RECIPE} component={RecipeScreen} />
-        <MealMenuStack.Screen name={navigationConstants.RECIPESLIST} component={RecipesListScreen} />
-        <MealMenuStack.Screen name={navigationConstants.SEARCH} component={SearchScreen} />
-      </MealMenuStack.Navigator>
-    )
-  }
+  // const MealMenuStack = createStackNavigator()
+  // function MealMenuStackScreen() {
+  //   return (
+  //     <MealMenuStack.Navigator
+  //       initialRouteName={navigationConstants.MEAM_MENU_HOME}
+  //       headerMode={Platform.OS === 'ios' ? 'float' : 'screen'}
+  //     >
+  //       <MealMenuStack.Screen name={navigationConstants.MEAM_MENU_HOME} component={MealMenuHomeScreen} />
+  //       <MealMenuStack.Screen name={navigationConstants.CATEGORIES} component={CategoriesScreen} />
+  //       <MealMenuStack.Screen name={navigationConstants.INGREDIENT} component={IngredientScreen} />
+  //       <MealMenuStack.Screen name={navigationConstants.INGREDIENTS} component={IngredientsDetailsScreen} />
+  //       <MealMenuStack.Screen name={navigationConstants.RECIPE} component={RecipeScreen} />
+  //       <MealMenuStack.Screen name={navigationConstants.RECIPESLIST} component={RecipesListScreen} />
+  //       <MealMenuStack.Screen name={navigationConstants.SEARCH} component={SearchScreen} />
+  //     </MealMenuStack.Navigator>
+  //   )
+  // }
 
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
@@ -170,13 +170,13 @@ export default function App(props) {
                     {props => <LocationStackScreen {...props} />}
                   </Tab.Screen>
                   <Tab.Screen
-                    name={navigationConstants.MEAM_MENU_HOME}
+                    name={navigationConstants.MENU}
                     options={{
-                      title: 'MealMenuHome',
+                      title: 'Menu',
                       tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-pizza' : 'md-pizza'} />,
                     }}
                   >
-                    {props => <MealMenuStackScreen {...props} />}
+                    {props => <MenuStackScreen {...props} />}
                   </Tab.Screen>
                 </Tab.Navigator>
               </>
