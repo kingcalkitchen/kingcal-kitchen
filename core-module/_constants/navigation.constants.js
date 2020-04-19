@@ -1,0 +1,45 @@
+export const navigationConstants = {
+    ROOT_STACK: {
+        APP: 'App',
+        AUTH: 'Auth',
+    },
+    STACKS: {
+        HOME: 'Home',
+        FEED: 'Feed',
+        MENU: 'Menu',
+        LOCATIONS: 'Locations',
+
+        TABS: 'Tabs',
+        BOTTOM_TABS: 'BottomTabs',
+        USER: 'User',
+        ADMIN: 'Admin',
+        SYSTEM_ADMIN: 'SystemAdmin',
+    },
+    MENU_TABS: {
+        MENU: 'Menu',
+        CATEGORIES: 'Categories',
+        SEARCH: 'Search',
+    },
+    SCREENS: {
+        FORGOT_PASSWORD: 'ForgotPassword',
+        LOGIN: 'Login',
+        REGISTER: 'Register',
+        USER: 'User',
+        ADMIN: 'Admin',
+        ADMIN_MENU: 'AdminMenu',
+        ADMIN_USERS: 'AdminUsers',
+        SYSTEM_ADMIN: 'SystemAdmin',
+
+        HOME: 'Home',
+        FEED: 'Feed',
+        FEED_ITEM_DETAILS: 'FeedItemDetails',
+        LOCATIONS: 'Locations',
+        MENU: 'Menu',
+        CATEGORIES: 'Categories',
+        INGREDIENT: 'Ingredient',
+        INGREDIENTS: 'Ingredients',
+        RECIPE: 'Recipe',
+        RECIPESLIST: 'RecipesList',
+        SEARCH: 'Search',
+    },
+}

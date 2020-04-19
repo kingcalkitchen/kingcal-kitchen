@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "kingcal-kitchen",
+    "slug": "kingcal-kitchen",
+    "privacy": "public",
+    "sdkVersion": "36.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./core-module/_assets/icon.png",
+    "splash": {
+      "image": "./core-module/_assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kingcalkitchen.kingcalkitchen",
+      "buildNumber": "1.0.0",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Enabling Face ID allows you quick and secure access to your account.",
+        "NSCameraUsageDescription": "This app uses the camera to scan barcodes on the meals we create. It also uses the camera to take pictures of the meals themselves for the menu."
+      }
+    },
+    "android": {
+      "package": "com.kingcalkitchen.kingcalkitchen",
+      "versionCode": 1
+    }
+  }
+}
